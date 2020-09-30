@@ -1,0 +1,12 @@
+C:\Users\yrote\source\repos\SalesProject\SalesProject\bin\Debug\SalesProject.exe.config
+C:\Users\yrote\source\repos\SalesProject\SalesProject\bin\Debug\SalesProject.exe
+C:\Users\yrote\source\repos\SalesProject\SalesProject\bin\Debug\SalesProject.pdb
+C:\Users\yrote\source\repos\SalesProject\SalesProject\obj\Debug\SalesProject.csprojAssemblyReference.cache
+C:\Users\yrote\source\repos\SalesProject\SalesProject\obj\Debug\SalesProject.Properties.Resources.resources
+C:\Users\yrote\source\repos\SalesProject\SalesProject\obj\Debug\SalesProject.csproj.GenerateResource.cache
+C:\Users\yrote\source\repos\SalesProject\SalesProject\obj\Debug\SalesProject.csproj.CoreCompileInputs.cache
+C:\Users\yrote\source\repos\SalesProject\SalesProject\obj\Debug\SalesProject.exe
+C:\Users\yrote\source\repos\SalesProject\SalesProject\obj\Debug\SalesProject.pdb
+C:\Users\yrote\source\repos\SalesProject\SalesProject\obj\Debug\SalesProject.loginPage.resources
+C:\Users\yrote\source\repos\SalesProject\SalesProject\obj\Debug\SalesProject.joeysMain.resources
+C:\Users\yrote\source\repos\SalesProject\SalesProject\obj\Debug\SalesProject.SignUpForm.resources

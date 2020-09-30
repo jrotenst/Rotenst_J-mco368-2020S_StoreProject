@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="StoreProject" Class="StoreDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=JR-LAPTOPXPS15\SQLEXPRESS;Initial Catalog=StoreProject;Integrated Security=True" SettingsObjectName="SalesProject.Properties.Settings" SettingsPropertyName="StoreProjectConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.CUSTOMER" Member="CUSTOMERs">
+    <Type Name="CUSTOMER">
+      <Column Name="userID" Type="System.String" DbType="VarChar(45) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="VarChar(45)" CanBeNull="true" />
+      <Column Name="firstName" Type="System.String" DbType="VarChar(45)" CanBeNull="true" />
+      <Column Name="lastName" Type="System.String" DbType="VarChar(45)" CanBeNull="true" />
+      <Column Name="phone" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="VarChar(45)" CanBeNull="true" />
+      <Column Name="city" Type="System.String" DbType="VarChar(45)" CanBeNull="true" />
+      <Column Name="state" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="zip" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="balance" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Association Name="CUSTOMER_PAYMENT" Member="PAYMENTs" ThisKey="userID" OtherKey="userID" Type="PAYMENT" />
+      <Association Name="CUSTOMER_ORDER" Member="ORDERs" ThisKey="userID" OtherKey="userID" Type="ORDER" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[ORDER]" Member="ORDERs">
+    <Type Name="ORDER">
+      <Column Name="orderID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="userID" Type="System.String" DbType="VarChar(45)" CanBeNull="true" />
+      <Column Name="date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="total" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Association Name="ORDER_ORDER_ITEM" Member="ORDER_ITEMs" ThisKey="orderID" OtherKey="orderID" Type="ORDER_ITEM" />
+      <Association Name="CUSTOMER_ORDER" Member="CUSTOMER" ThisKey="userID" OtherKey="userID" Type="CUSTOMER" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ORDER_ITEMS" Member="ORDER_ITEMs">
+    <Type Name="ORDER_ITEM">
+      <Column Name="orderID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="prodID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ORDER_ORDER_ITEM" Member="ORDER" ThisKey="orderID" OtherKey="orderID" Type="ORDER" IsForeignKey="true" />
+      <Association Name="PRODUCT_ORDER_ITEM" Member="PRODUCT" ThisKey="prodID" OtherKey="prodID" Type="PRODUCT" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PAYMENT" Member="PAYMENTs">
+    <Type Name="PAYMENT">
+      <Column Name="paymentID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="userID" Type="System.String" DbType="VarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Association Name="CUSTOMER_PAYMENT" Member="CUSTOMER" ThisKey="userID" OtherKey="userID" Type="CUSTOMER" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PRODUCT" Member="PRODUCTs">
+    <Type Name="PRODUCT">
+      <Column Name="prodID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="prodName" Type="System.String" DbType="VarChar(45)" CanBeNull="true" />
+      <Column Name="prodPrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="prodStock" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="PRODUCT_ORDER_ITEM" Member="ORDER_ITEMs" ThisKey="prodID" OtherKey="prodID" Type="ORDER_ITEM" />
+    </Type>
+  </Table>
+</Database>
