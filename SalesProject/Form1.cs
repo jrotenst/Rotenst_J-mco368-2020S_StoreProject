@@ -66,7 +66,7 @@ namespace SalesProject
                     Visible = false;
                 }
             }
-            catch(Exception )
+            catch(Exception ex)
             {
                 messageLabel.Text = "no account found with this email";
             }

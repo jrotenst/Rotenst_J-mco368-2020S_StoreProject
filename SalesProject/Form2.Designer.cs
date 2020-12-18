@@ -29,8 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.cartTab = new System.Windows.Forms.TabPage();
+            this.cartItemQtyLabel = new System.Windows.Forms.Label();
+            this.cartItemPriceLabel = new System.Windows.Forms.Label();
+            this.removeItemButton = new System.Windows.Forms.Button();
+            this.cartTotalLabel = new System.Windows.Forms.Label();
+            this.cartItemNameLabel = new System.Windows.Forms.Label();
+            this.selectedItemLabel = new System.Windows.Forms.Label();
+            this.checkoutButton = new System.Windows.Forms.Button();
+            this.cartItemsDisplay = new System.Windows.Forms.DataGridView();
+            this.cartHeader = new System.Windows.Forms.Label();
+            this.homeTab = new System.Windows.Forms.TabPage();
             this.JoeysLabel = new System.Windows.Forms.Label();
             this.addToCartButton = new System.Windows.Forms.Button();
             this.itemNameLabel = new System.Windows.Forms.Label();
@@ -50,43 +59,176 @@
             this.storeProjectDataSet1 = new SalesProject.StoreProjectDataSet1();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.pRODUCTTableAdapter = new SalesProject.StoreProjectDataSet1TableAdapters.PRODUCTTableAdapter();
-            this.tabPage1.SuspendLayout();
+            this.cartTotalValueLabel = new System.Windows.Forms.Label();
+            this.cartTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cartItemsDisplay)).BeginInit();
+            this.homeTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pRODUCTBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.storeProjectDataSet1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabPage2
+            // cartTab
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1406, 844);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.cartTab.Controls.Add(this.cartTotalValueLabel);
+            this.cartTab.Controls.Add(this.cartItemQtyLabel);
+            this.cartTab.Controls.Add(this.cartItemPriceLabel);
+            this.cartTab.Controls.Add(this.removeItemButton);
+            this.cartTab.Controls.Add(this.cartTotalLabel);
+            this.cartTab.Controls.Add(this.cartItemNameLabel);
+            this.cartTab.Controls.Add(this.selectedItemLabel);
+            this.cartTab.Controls.Add(this.checkoutButton);
+            this.cartTab.Controls.Add(this.cartItemsDisplay);
+            this.cartTab.Controls.Add(this.cartHeader);
+            this.cartTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cartTab.Location = new System.Drawing.Point(4, 25);
+            this.cartTab.Name = "cartTab";
+            this.cartTab.Padding = new System.Windows.Forms.Padding(3);
+            this.cartTab.Size = new System.Drawing.Size(1406, 844);
+            this.cartTab.TabIndex = 1;
+            this.cartTab.Text = "Cart";
+            this.cartTab.UseVisualStyleBackColor = true;
             // 
-            // tabPage1
+            // cartItemQtyLabel
             // 
-            this.tabPage1.Controls.Add(this.JoeysLabel);
-            this.tabPage1.Controls.Add(this.addToCartButton);
-            this.tabPage1.Controls.Add(this.itemNameLabel);
-            this.tabPage1.Controls.Add(this.qtyTextBox);
-            this.tabPage1.Controls.Add(this.qtyLabel);
-            this.tabPage1.Controls.Add(this.stockLabel);
-            this.tabPage1.Controls.Add(this.priceLabel);
-            this.tabPage1.Controls.Add(this.itemDetailsLabel);
-            this.tabPage1.Controls.Add(this.searchBar);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.itemList);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1406, 844);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Home";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.cartItemQtyLabel.AutoSize = true;
+            this.cartItemQtyLabel.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cartItemQtyLabel.Location = new System.Drawing.Point(667, 250);
+            this.cartItemQtyLabel.Name = "cartItemQtyLabel";
+            this.cartItemQtyLabel.Size = new System.Drawing.Size(91, 20);
+            this.cartItemQtyLabel.TabIndex = 17;
+            this.cartItemQtyLabel.Text = "Quantity:";
+            this.cartItemQtyLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cartItemPriceLabel
+            // 
+            this.cartItemPriceLabel.AutoSize = true;
+            this.cartItemPriceLabel.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cartItemPriceLabel.Location = new System.Drawing.Point(470, 250);
+            this.cartItemPriceLabel.Name = "cartItemPriceLabel";
+            this.cartItemPriceLabel.Size = new System.Drawing.Size(58, 20);
+            this.cartItemPriceLabel.TabIndex = 16;
+            this.cartItemPriceLabel.Text = "Price:";
+            this.cartItemPriceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // removeItemButton
+            // 
+            this.removeItemButton.BackColor = System.Drawing.Color.IndianRed;
+            this.removeItemButton.CausesValidation = false;
+            this.removeItemButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.removeItemButton.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.removeItemButton.ForeColor = System.Drawing.Color.White;
+            this.removeItemButton.Location = new System.Drawing.Point(570, 322);
+            this.removeItemButton.Name = "removeItemButton";
+            this.removeItemButton.Size = new System.Drawing.Size(236, 53);
+            this.removeItemButton.TabIndex = 15;
+            this.removeItemButton.Text = "Remove from Cart";
+            this.removeItemButton.UseVisualStyleBackColor = false;
+            this.removeItemButton.Visible = false;
+            this.removeItemButton.Click += new System.EventHandler(this.removeItemButton_Click);
+            // 
+            // cartTotalLabel
+            // 
+            this.cartTotalLabel.AutoSize = true;
+            this.cartTotalLabel.BackColor = System.Drawing.Color.Transparent;
+            this.cartTotalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cartTotalLabel.ForeColor = System.Drawing.Color.ForestGreen;
+            this.cartTotalLabel.Location = new System.Drawing.Point(458, 474);
+            this.cartTotalLabel.Name = "cartTotalLabel";
+            this.cartTotalLabel.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.cartTotalLabel.Size = new System.Drawing.Size(172, 36);
+            this.cartTotalLabel.TabIndex = 14;
+            this.cartTotalLabel.Text = "Cart Total:";
+            // 
+            // cartItemNameLabel
+            // 
+            this.cartItemNameLabel.AutoSize = true;
+            this.cartItemNameLabel.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cartItemNameLabel.Location = new System.Drawing.Point(470, 172);
+            this.cartItemNameLabel.Name = "cartItemNameLabel";
+            this.cartItemNameLabel.Size = new System.Drawing.Size(160, 20);
+            this.cartItemNameLabel.TabIndex = 13;
+            this.cartItemNameLabel.Text = "No Item Selected";
+            this.cartItemNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // selectedItemLabel
+            // 
+            this.selectedItemLabel.AutoSize = true;
+            this.selectedItemLabel.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.selectedItemLabel.ForeColor = System.Drawing.Color.DarkSeaGreen;
+            this.selectedItemLabel.Location = new System.Drawing.Point(519, 101);
+            this.selectedItemLabel.Name = "selectedItemLabel";
+            this.selectedItemLabel.Size = new System.Drawing.Size(304, 36);
+            this.selectedItemLabel.TabIndex = 12;
+            this.selectedItemLabel.Text = "Selected Cart Item";
+            // 
+            // checkoutButton
+            // 
+            this.checkoutButton.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.checkoutButton.CausesValidation = false;
+            this.checkoutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkoutButton.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkoutButton.ForeColor = System.Drawing.Color.White;
+            this.checkoutButton.Location = new System.Drawing.Point(756, 457);
+            this.checkoutButton.Name = "checkoutButton";
+            this.checkoutButton.Size = new System.Drawing.Size(160, 53);
+            this.checkoutButton.TabIndex = 11;
+            this.checkoutButton.Text = "Checkout";
+            this.checkoutButton.UseVisualStyleBackColor = false;
+            this.checkoutButton.Visible = false;
+            this.checkoutButton.Click += new System.EventHandler(this.checkoutButton_Click);
+            // 
+            // cartItemsDisplay
+            // 
+            this.cartItemsDisplay.AllowUserToAddRows = false;
+            this.cartItemsDisplay.AllowUserToDeleteRows = false;
+            this.cartItemsDisplay.AllowUserToResizeColumns = false;
+            this.cartItemsDisplay.AllowUserToResizeRows = false;
+            this.cartItemsDisplay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.cartItemsDisplay.Location = new System.Drawing.Point(35, 101);
+            this.cartItemsDisplay.Name = "cartItemsDisplay";
+            this.cartItemsDisplay.RowHeadersWidth = 51;
+            this.cartItemsDisplay.RowTemplate.Height = 24;
+            this.cartItemsDisplay.Size = new System.Drawing.Size(417, 453);
+            this.cartItemsDisplay.TabIndex = 1;
+            this.cartItemsDisplay.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.cartItemsDisplay_CellClick);
+            // 
+            // cartHeader
+            // 
+            this.cartHeader.AutoSize = true;
+            this.cartHeader.BackColor = System.Drawing.Color.Transparent;
+            this.cartHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cartHeader.ForeColor = System.Drawing.Color.ForestGreen;
+            this.cartHeader.Location = new System.Drawing.Point(413, 19);
+            this.cartHeader.Name = "cartHeader";
+            this.cartHeader.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.cartHeader.Size = new System.Drawing.Size(115, 46);
+            this.cartHeader.TabIndex = 0;
+            this.cartHeader.Text = "Cart";
+            this.cartHeader.Click += new System.EventHandler(this.cartHeader_Click);
+            // 
+            // homeTab
+            // 
+            this.homeTab.Controls.Add(this.JoeysLabel);
+            this.homeTab.Controls.Add(this.addToCartButton);
+            this.homeTab.Controls.Add(this.itemNameLabel);
+            this.homeTab.Controls.Add(this.qtyTextBox);
+            this.homeTab.Controls.Add(this.qtyLabel);
+            this.homeTab.Controls.Add(this.stockLabel);
+            this.homeTab.Controls.Add(this.priceLabel);
+            this.homeTab.Controls.Add(this.itemDetailsLabel);
+            this.homeTab.Controls.Add(this.searchBar);
+            this.homeTab.Controls.Add(this.label1);
+            this.homeTab.Controls.Add(this.itemList);
+            this.homeTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.homeTab.Location = new System.Drawing.Point(4, 25);
+            this.homeTab.Name = "homeTab";
+            this.homeTab.Padding = new System.Windows.Forms.Padding(3);
+            this.homeTab.Size = new System.Drawing.Size(1406, 844);
+            this.homeTab.TabIndex = 0;
+            this.homeTab.Text = "Home";
+            this.homeTab.UseVisualStyleBackColor = true;
             // 
             // JoeysLabel
             // 
@@ -129,7 +271,7 @@
             // 
             this.qtyTextBox.Location = new System.Drawing.Point(777, 289);
             this.qtyTextBox.Name = "qtyTextBox";
-            this.qtyTextBox.Size = new System.Drawing.Size(49, 22);
+            this.qtyTextBox.Size = new System.Drawing.Size(49, 24);
             this.qtyTextBox.TabIndex = 8;
             this.qtyTextBox.Visible = false;
             // 
@@ -179,7 +321,7 @@
             // 
             this.searchBar.Location = new System.Drawing.Point(183, 160);
             this.searchBar.Name = "searchBar";
-            this.searchBar.Size = new System.Drawing.Size(266, 22);
+            this.searchBar.Size = new System.Drawing.Size(266, 24);
             this.searchBar.TabIndex = 2;
             this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged);
             // 
@@ -268,17 +410,29 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.homeTab);
+            this.tabControl1.Controls.Add(this.cartTab);
             this.tabControl1.Location = new System.Drawing.Point(0, -1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1414, 873);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // pRODUCTTableAdapter
             // 
             this.pRODUCTTableAdapter.ClearBeforeFill = true;
+            // 
+            // cartTotalValueLabel
+            // 
+            this.cartTotalValueLabel.AutoSize = true;
+            this.cartTotalValueLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cartTotalValueLabel.Location = new System.Drawing.Point(636, 482);
+            this.cartTotalValueLabel.Name = "cartTotalValueLabel";
+            this.cartTotalValueLabel.Size = new System.Drawing.Size(71, 25);
+            this.cartTotalValueLabel.TabIndex = 18;
+            this.cartTotalValueLabel.Text = "$0.00";
+            this.cartTotalValueLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // joeysMain
             // 
@@ -291,8 +445,11 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Welcome to Joey\'s";
             this.Load += new System.EventHandler(this.Form2_Load);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.cartTab.ResumeLayout(false);
+            this.cartTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cartItemsDisplay)).EndInit();
+            this.homeTab.ResumeLayout(false);
+            this.homeTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pRODUCTBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.storeProjectDataSet1)).EndInit();
@@ -302,8 +459,8 @@
         }
 
         #endregion
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage cartTab;
+        private System.Windows.Forms.TabPage homeTab;
         private System.Windows.Forms.TextBox searchBar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView itemList;
@@ -323,5 +480,15 @@
         private System.Windows.Forms.DataGridViewButtonColumn prodNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn prodPriceDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn prodStockDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label cartHeader;
+        private System.Windows.Forms.DataGridView cartItemsDisplay;
+        private System.Windows.Forms.Button checkoutButton;
+        private System.Windows.Forms.Label cartItemNameLabel;
+        private System.Windows.Forms.Label selectedItemLabel;
+        private System.Windows.Forms.Label cartTotalLabel;
+        private System.Windows.Forms.Label cartItemQtyLabel;
+        private System.Windows.Forms.Label cartItemPriceLabel;
+        private System.Windows.Forms.Button removeItemButton;
+        private System.Windows.Forms.Label cartTotalValueLabel;
     }
 }
