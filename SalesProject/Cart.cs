@@ -68,17 +68,20 @@ namespace SalesProject
             }
         }
 
-        public void Checkout()
+        public bool AttemptCheckout()
         {
             if (cartTotal + balance <= CREDIT_LIMIT)
             {
                 balance += cartTotal;
                 SaveOrderToDatabase();
                 DisplayCheckoutSuccessMessage();
+                cartItems.Clear();
+                return true;
             }
             else
             {
                 DisplayCreditLimitExceededMessage();
+                return false;
             }
         }
 
@@ -99,7 +102,12 @@ namespace SalesProject
                 orderItem.prodID = item.Key.prodID;
                 orderItem.quantity = item.Value;
                 
+                // add products to order
                 order.ORDER_ITEMs.Add(orderItem);
+
+                // decrease amount in stock
+                var prod = db.PRODUCTs.FirstOrDefault(p => p.prodID == item.Key.prodID);
+                prod.prodStock -= item.Value;
             }
 
             user.balance = balance;
@@ -118,13 +126,12 @@ namespace SalesProject
         private void DisplayCheckoutSuccessMessage()
         {
             MessageBox.Show("Your account will be charged "
-                    + cartTotal.ToString() + " for this purchase.");
+                    + string.Format("{0:C}", cartTotal) + " for this purchase.");
         }
 
         private void DisplayCreditLimitExceededMessage()
         {
-            MessageBox.Show("Your account will be charged "
-                    + cartTotal.ToString() + " for this purchase.");
+            MessageBox.Show("Purchase unsuccessful. Account credit limit exceeded.");
         }
 
     }

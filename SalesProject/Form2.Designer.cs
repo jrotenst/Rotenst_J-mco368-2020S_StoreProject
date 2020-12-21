@@ -49,7 +49,7 @@
             this.priceLabel = new System.Windows.Forms.Label();
             this.itemDetailsLabel = new System.Windows.Forms.Label();
             this.searchBar = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.searchLabel = new System.Windows.Forms.Label();
             this.itemList = new System.Windows.Forms.DataGridView();
             this.prodIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.prodNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -60,6 +60,10 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.pRODUCTTableAdapter = new SalesProject.StoreProjectDataSet1TableAdapters.PRODUCTTableAdapter();
             this.cartTotalValueLabel = new System.Windows.Forms.Label();
+            this.accountTab = new System.Windows.Forms.TabPage();
+            this.accountTabHeaderLabel = new System.Windows.Forms.Label();
+            this.balanceLabel = new System.Windows.Forms.Label();
+            this.balanceValueLabel = new System.Windows.Forms.Label();
             this.cartTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cartItemsDisplay)).BeginInit();
             this.homeTab.SuspendLayout();
@@ -67,6 +71,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pRODUCTBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.storeProjectDataSet1)).BeginInit();
             this.tabControl1.SuspendLayout();
+            this.accountTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // cartTab
@@ -219,7 +224,7 @@
             this.homeTab.Controls.Add(this.priceLabel);
             this.homeTab.Controls.Add(this.itemDetailsLabel);
             this.homeTab.Controls.Add(this.searchBar);
-            this.homeTab.Controls.Add(this.label1);
+            this.homeTab.Controls.Add(this.searchLabel);
             this.homeTab.Controls.Add(this.itemList);
             this.homeTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.homeTab.Location = new System.Drawing.Point(4, 25);
@@ -325,16 +330,16 @@
             this.searchBar.TabIndex = 2;
             this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged);
             // 
-            // label1
+            // searchLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Verdana", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.DarkSeaGreen;
-            this.label1.Location = new System.Drawing.Point(72, 153);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(95, 29);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Search";
+            this.searchLabel.AutoSize = true;
+            this.searchLabel.Font = new System.Drawing.Font("Verdana", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchLabel.ForeColor = System.Drawing.Color.DarkSeaGreen;
+            this.searchLabel.Location = new System.Drawing.Point(72, 153);
+            this.searchLabel.Name = "searchLabel";
+            this.searchLabel.Size = new System.Drawing.Size(95, 29);
+            this.searchLabel.TabIndex = 1;
+            this.searchLabel.Text = "Search";
             // 
             // itemList
             // 
@@ -412,6 +417,7 @@
             // 
             this.tabControl1.Controls.Add(this.homeTab);
             this.tabControl1.Controls.Add(this.cartTab);
+            this.tabControl1.Controls.Add(this.accountTab);
             this.tabControl1.Location = new System.Drawing.Point(0, -1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -434,6 +440,58 @@
             this.cartTotalValueLabel.Text = "$0.00";
             this.cartTotalValueLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // accountTab
+            // 
+            this.accountTab.Controls.Add(this.balanceValueLabel);
+            this.accountTab.Controls.Add(this.balanceLabel);
+            this.accountTab.Controls.Add(this.accountTabHeaderLabel);
+            this.accountTab.Location = new System.Drawing.Point(4, 25);
+            this.accountTab.Name = "accountTab";
+            this.accountTab.Padding = new System.Windows.Forms.Padding(3);
+            this.accountTab.Size = new System.Drawing.Size(1406, 844);
+            this.accountTab.TabIndex = 2;
+            this.accountTab.Text = "Account";
+            this.accountTab.UseVisualStyleBackColor = true;
+            // 
+            // accountTabHeaderLabel
+            // 
+            this.accountTabHeaderLabel.AutoSize = true;
+            this.accountTabHeaderLabel.BackColor = System.Drawing.Color.Transparent;
+            this.accountTabHeaderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.accountTabHeaderLabel.ForeColor = System.Drawing.Color.ForestGreen;
+            this.accountTabHeaderLabel.Location = new System.Drawing.Point(316, 25);
+            this.accountTabHeaderLabel.Name = "accountTabHeaderLabel";
+            this.accountTabHeaderLabel.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.accountTabHeaderLabel.Size = new System.Drawing.Size(305, 46);
+            this.accountTabHeaderLabel.TabIndex = 1;
+            this.accountTabHeaderLabel.Text = "Account Home";
+            // 
+            // balanceLabel
+            // 
+            this.balanceLabel.AutoSize = true;
+            this.balanceLabel.BackColor = System.Drawing.Color.Transparent;
+            this.balanceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 19F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.balanceLabel.ForeColor = System.Drawing.Color.MediumSeaGreen;
+            this.balanceLabel.Location = new System.Drawing.Point(8, 124);
+            this.balanceLabel.Name = "balanceLabel";
+            this.balanceLabel.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.balanceLabel.Size = new System.Drawing.Size(287, 37);
+            this.balanceLabel.TabIndex = 2;
+            this.balanceLabel.Text = "Account Balance:";
+            // 
+            // balanceValueLabel
+            // 
+            this.balanceValueLabel.AutoSize = true;
+            this.balanceValueLabel.BackColor = System.Drawing.Color.Transparent;
+            this.balanceValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 19F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.balanceValueLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.balanceValueLabel.Location = new System.Drawing.Point(331, 124);
+            this.balanceValueLabel.Name = "balanceValueLabel";
+            this.balanceValueLabel.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.balanceValueLabel.Size = new System.Drawing.Size(118, 37);
+            this.balanceValueLabel.TabIndex = 3;
+            this.balanceValueLabel.Text = "$0.00";
+            // 
             // joeysMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -454,6 +512,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pRODUCTBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.storeProjectDataSet1)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            this.accountTab.ResumeLayout(false);
+            this.accountTab.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -462,7 +522,7 @@
         private System.Windows.Forms.TabPage cartTab;
         private System.Windows.Forms.TabPage homeTab;
         private System.Windows.Forms.TextBox searchBar;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label searchLabel;
         private System.Windows.Forms.DataGridView itemList;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.Label itemDetailsLabel;
@@ -490,5 +550,9 @@
         private System.Windows.Forms.Label cartItemPriceLabel;
         private System.Windows.Forms.Button removeItemButton;
         private System.Windows.Forms.Label cartTotalValueLabel;
+        private System.Windows.Forms.TabPage accountTab;
+        private System.Windows.Forms.Label balanceValueLabel;
+        private System.Windows.Forms.Label balanceLabel;
+        private System.Windows.Forms.Label accountTabHeaderLabel;
     }
 }

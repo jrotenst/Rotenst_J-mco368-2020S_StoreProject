@@ -31,6 +31,7 @@ namespace SalesProject
             this.pRODUCTTableAdapter.Fill(this.storeProjectDataSet1.PRODUCT);
             itemList.Sort(itemList.Columns[1], ListSortDirection.Ascending);
             UpdateCartTabData();
+            UpdateAccountTab();
         }
 
         private void UpdateCartTabData()
@@ -53,7 +54,25 @@ namespace SalesProject
             {
                 checkoutButton.Visible = true;
             }
+            else
+            {
+                cartItemNameLabel.Text = "No item selected";
+                cartItemPriceLabel.Text = "Price:";
+                cartItemQtyLabel.Text = "Quantity";
+                removeItemButton.Visible = false;
+            }
             cartTotalValueLabel.Text = string.Format("{0:C}", cart.GetCartTotal());
+        }
+
+        private void UpdateAccountTab()
+        {
+            balanceValueLabel.Text = GetUserBalance();
+        }
+
+        private string GetUserBalance()
+        {
+            decimal bal = db.CUSTOMERs.Single(c => c.userID == userID).balance ?? 0;
+            return string.Format("{0:C}", bal);
         }
 
         private void searchBar_TextChanged(object sender, EventArgs e)
@@ -146,7 +165,12 @@ namespace SalesProject
         {
             if (cart.GetCartItems().Count != 0)
             {
-                cart.Checkout();
+                if (cart.AttemptCheckout())
+                {
+                    db = new StoreDBDataContext();
+                }
+                UpdateAccountTab();
+                UpdateCartTabData();
             }
             else
             {
