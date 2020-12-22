@@ -43,13 +43,13 @@ namespace SalesProject
 
             account.CartItems.ToList().ForEach(kvp => dt.Rows.Add(new object[]
             {
-                kvp.Key.prodID, 
-                kvp.Key.prodName, 
+                kvp.Key.prodID,
+                kvp.Key.prodName,
                 kvp.Value
             }));
 
             cartItemsDisplay.DataSource = dt;
-            
+
             if (account.CartItems.Count > 0)
             {
                 checkoutButton.Visible = true;
@@ -74,20 +74,15 @@ namespace SalesProject
 
         private void UpdatePurchasesTab()
         {
-            DataTable dt = new DataTable();
+            purchasesDisplay.DataSource = db.ORDERs.Where(o => o.userID == account.UserID);
+            purchasesDisplay.Columns[0].HeaderText = "ID";
+            purchasesDisplay.Columns[2].HeaderText = "Date";
+            purchasesDisplay.Columns[3].HeaderText = "Total";
+            purchasesDisplay.Columns[2].DefaultCellStyle.Format = "d";
+            purchasesDisplay.Columns[3].DefaultCellStyle.Format = "c";
 
-            dt.Columns.Add("ID", typeof(int));
-            dt.Columns.Add("Date", typeof(string));
-            dt.Columns.Add("Total", typeof(string));
-
-            db.ORDERs.Where(p => p.userID == account.UserID).ToList().ForEach(p => dt.Rows.Add(new object[]
-            {
-                p.orderID,
-                string.Format("{0:MM/dd/yy}", p.date),
-                string.Format("{0:C}", p.total)
-            }));
-
-            purchasesDisplay.DataSource = dt;
+            purchasesDisplay.Columns[1].Visible = false;
+            purchasesDisplay.Columns[4].Visible = false;
         }
 
         private void searchBar_TextChanged(object sender, EventArgs e)
@@ -228,7 +223,45 @@ namespace SalesProject
 
         private void sortPurchasesButton_Click(object sender, EventArgs e)
         {
-            //GetSortingParams();
+            DateTime[] dr = GetDateParams();
+            decimal[] pr = GetPriceRange();
+            SortPurchases(dr, pr);
         }
+
+        private DateTime[] GetDateParams()
+        {
+            return new DateTime[]
+            {
+                DateTime.Parse(fromDateTextBox.Text),
+                DateTime.Parse(toDateTextBox.Text)
+            };
+        }
+
+        private decimal[] GetPriceRange()
+        {
+            return new decimal[]
+            {
+                decimal.Parse(fromPriceTextBox.Text),
+                decimal.Parse(toPriceTextBox.Text)
+            };
+        }
+
+        private void SortPurchases(DateTime[] dateRange, decimal[] priceRange)
+        {
+            purchasesDisplay.DataSource = db.ORDERs.Where(p => p.date >= dateRange[0] &&
+            p.date <= dateRange[1] && p.total >= priceRange[0] && p.total <= priceRange[1]);
+
+            purchasesDisplay.Columns[0].HeaderText = "ID";
+            purchasesDisplay.Columns[2].HeaderText = "Date";
+            purchasesDisplay.Columns[3].HeaderText = "Total";
+
+            purchasesDisplay.Columns[2].DefaultCellStyle.Format = "d";
+            purchasesDisplay.Columns[3].DefaultCellStyle.Format = "c";
+
+            purchasesDisplay.Columns[1].Visible = false;
+            purchasesDisplay.Columns[4].Visible = false;
+        }
+
     }
+
 }

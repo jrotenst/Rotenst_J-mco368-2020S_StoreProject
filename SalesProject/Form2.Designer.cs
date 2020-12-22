@@ -84,6 +84,11 @@
             this.toPriceLabel = new System.Windows.Forms.Label();
             this.fromPriceLabel = new System.Windows.Forms.Label();
             this.sortPurchasesButton = new System.Windows.Forms.Button();
+            this.storeProjectDataSet2 = new SalesProject.StoreProjectDataSet2();
+            this.storeProjectDataSet = new SalesProject.StoreProjectDataSet();
+            this.storeProjectDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.storeProjectDataSetBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.storeProjectDataSet2BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cartTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cartItemsDisplay)).BeginInit();
             this.homeTab.SuspendLayout();
@@ -94,6 +99,11 @@
             this.accountTab.SuspendLayout();
             this.purchaseTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.purchasesDisplay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.storeProjectDataSet2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.storeProjectDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.storeProjectDataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.storeProjectDataSetBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.storeProjectDataSet2BindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // cartTab
@@ -639,11 +649,12 @@
             this.purchasesDisplay.AllowUserToResizeColumns = false;
             this.purchasesDisplay.AllowUserToResizeRows = false;
             this.purchasesDisplay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.purchasesDisplay.Location = new System.Drawing.Point(31, 174);
+            this.purchasesDisplay.Location = new System.Drawing.Point(8, 174);
             this.purchasesDisplay.Name = "purchasesDisplay";
+            this.purchasesDisplay.ReadOnly = true;
             this.purchasesDisplay.RowHeadersWidth = 51;
             this.purchasesDisplay.RowTemplate.Height = 24;
-            this.purchasesDisplay.Size = new System.Drawing.Size(417, 305);
+            this.purchasesDisplay.Size = new System.Drawing.Size(466, 305);
             this.purchasesDisplay.TabIndex = 19;
             // 
             // dateRangeLabel1
@@ -771,6 +782,31 @@
             this.sortPurchasesButton.UseVisualStyleBackColor = false;
             this.sortPurchasesButton.Click += new System.EventHandler(this.sortPurchasesButton_Click);
             // 
+            // storeProjectDataSet2
+            // 
+            this.storeProjectDataSet2.DataSetName = "StoreProjectDataSet2";
+            this.storeProjectDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // storeProjectDataSet
+            // 
+            this.storeProjectDataSet.DataSetName = "StoreProjectDataSet";
+            this.storeProjectDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // storeProjectDataSetBindingSource
+            // 
+            this.storeProjectDataSetBindingSource.DataSource = this.storeProjectDataSet;
+            this.storeProjectDataSetBindingSource.Position = 0;
+            // 
+            // storeProjectDataSetBindingSource1
+            // 
+            this.storeProjectDataSetBindingSource1.DataSource = this.storeProjectDataSet;
+            this.storeProjectDataSetBindingSource1.Position = 0;
+            // 
+            // storeProjectDataSet2BindingSource
+            // 
+            this.storeProjectDataSet2BindingSource.DataSource = this.storeProjectDataSet2;
+            this.storeProjectDataSet2BindingSource.Position = 0;
+            // 
             // joeysMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -796,6 +832,11 @@
             this.purchaseTab.ResumeLayout(false);
             this.purchaseTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.purchasesDisplay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.storeProjectDataSet2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.storeProjectDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.storeProjectDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.storeProjectDataSetBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.storeProjectDataSet2BindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -856,5 +897,10 @@
         private System.Windows.Forms.Label fromPriceLabel;
         private System.Windows.Forms.Label sortByTotalLabel;
         private System.Windows.Forms.Button sortPurchasesButton;
+        private StoreProjectDataSet2 storeProjectDataSet2;
+        private System.Windows.Forms.BindingSource storeProjectDataSetBindingSource;
+        private StoreProjectDataSet storeProjectDataSet;
+        private System.Windows.Forms.BindingSource storeProjectDataSetBindingSource1;
+        private System.Windows.Forms.BindingSource storeProjectDataSet2BindingSource;
     }
 }
