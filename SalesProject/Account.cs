@@ -7,43 +7,68 @@ using System.Windows.Forms;
 
 namespace SalesProject
 {
-    class Cart 
+    class Account
     {
         private readonly decimal CREDIT_LIMIT = 1000;
 
-        private String userID;
+        private string userID;
         private CUSTOMER user;
         private decimal? balance;
+        private string name;
+        private string email;
+        private string address;
         private decimal cartTotal = 0;
         private StoreDBDataContext db = new StoreDBDataContext();
         private Dictionary<PRODUCT, int> cartItems = new Dictionary<PRODUCT, int>();
         
 
-        public Cart(String userID)
+        public Account(string userID)
         {
             this.userID = userID;
             ConfigureUserData();
         }
 
-        private void ConfigureUserData() 
+        public string UserID => userID; 
+
+        public Dictionary<PRODUCT, int> CartItems => cartItems;
+
+        public decimal CartTotal => cartTotal;
+
+        public decimal Balance => balance ?? 0;
+
+        public string Name => name;
+
+        public string Email => email;
+
+        public string Address => address;
+
+        private void ConfigureUserData()
         {
+            // refresh db
+            db.Refresh(System.Data.Linq.RefreshMode.KeepChanges);
+
             user = db.CUSTOMERs.FirstOrDefault(u => u.userID == userID) ?? null;
             if (user == null)
             {
                 throw new NullReferenceException("user data could not be retrieved.");
             }
             balance = user.balance ?? 0;
-
+            name = user.firstName + " " + user.lastName;
+            email = user.email;
+            address = user.address + ", " + user.city + ", " + user.state + " " + user.zip;
         }
 
-        public Dictionary<PRODUCT, int> GetCartItems()
+        public void PayBalance(decimal d)
         {
-            return cartItems;
-        }
-
-        public decimal GetCartTotal()
-        {
-            return cartTotal;
+            if (d > 0)
+            {
+                user.balance -= d;
+                SubmitPayment(d);
+            }
+            else
+            {
+                DisplayInvalidAmountMessage();
+            }
         }
 
         public void AddToCart(PRODUCT p, int qty)
@@ -70,12 +95,11 @@ namespace SalesProject
 
         public bool AttemptCheckout()
         {
-            if (cartTotal + balance <= CREDIT_LIMIT)
+            if (cartTotal + (user.balance ?? 0) <= CREDIT_LIMIT)
             {
-                balance += cartTotal;
-                SaveOrderToDatabase();
-                DisplayCheckoutSuccessMessage();
+                PlaceOrder();
                 cartItems.Clear();
+                ConfigureUserData();
                 return true;
             }
             else
@@ -85,8 +109,12 @@ namespace SalesProject
             }
         }
 
-        private void SaveOrderToDatabase()
+        private void PlaceOrder()
         {
+            // update user balance
+            user.balance += cartTotal;
+            
+            // create order
             ORDER order = new ORDER();
             order.CUSTOMER = user;
             order.userID = userID;
@@ -110,16 +138,37 @@ namespace SalesProject
                 prod.prodStock -= item.Value;
             }
 
-            user.balance = balance;
+            // submit changes to db
+            SubmitOrder();
+        }
 
+        private void SubmitOrder()
+        {
             try
             {
                 db.SubmitChanges();
+
+                DisplayCheckoutSuccessMessage();
+                cartTotal = 0;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MessageBox.Show("Error: your order could not be placed at this time.");
                 throw new Exception("Error saving order to database.");
+            }
+        }
+
+        private void SubmitPayment(decimal d)
+        {         
+            try
+            {
+                db.SubmitChanges();
+                DisplaySuccessfulPaymentMessage(d);
+                ConfigureUserData();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
             }
         }
 
@@ -132,6 +181,17 @@ namespace SalesProject
         private void DisplayCreditLimitExceededMessage()
         {
             MessageBox.Show("Purchase unsuccessful. Account credit limit exceeded.");
+        }
+
+        private void DisplaySuccessfulPaymentMessage(decimal d)
+        {
+            MessageBox.Show("Your payment of " + string.Format("{0:C}", d) +
+                        " has been processed successfuly.");
+        }
+
+        private void DisplayInvalidAmountMessage()
+        {
+            MessageBox.Show("Payment amounts must be greater than 0.");
         }
 
     }

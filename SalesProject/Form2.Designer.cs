@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.cartTab = new System.Windows.Forms.TabPage();
+            this.cartTotalValueLabel = new System.Windows.Forms.Label();
             this.cartItemQtyLabel = new System.Windows.Forms.Label();
             this.cartItemPriceLabel = new System.Windows.Forms.Label();
             this.removeItemButton = new System.Windows.Forms.Button();
@@ -58,12 +59,31 @@
             this.pRODUCTBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.storeProjectDataSet1 = new SalesProject.StoreProjectDataSet1();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.pRODUCTTableAdapter = new SalesProject.StoreProjectDataSet1TableAdapters.PRODUCTTableAdapter();
-            this.cartTotalValueLabel = new System.Windows.Forms.Label();
             this.accountTab = new System.Windows.Forms.TabPage();
-            this.accountTabHeaderLabel = new System.Windows.Forms.Label();
-            this.balanceLabel = new System.Windows.Forms.Label();
+            this.amountLabel = new System.Windows.Forms.Label();
+            this.paymentTextBox = new System.Windows.Forms.TextBox();
+            this.makePaymentButton = new System.Windows.Forms.Button();
             this.balanceValueLabel = new System.Windows.Forms.Label();
+            this.balanceLabel = new System.Windows.Forms.Label();
+            this.accountTabHeaderLabel = new System.Windows.Forms.Label();
+            this.pRODUCTTableAdapter = new SalesProject.StoreProjectDataSet1TableAdapters.PRODUCTTableAdapter();
+            this.purchaseTab = new System.Windows.Forms.TabPage();
+            this.accountNameLabel = new System.Windows.Forms.Label();
+            this.addressLabel = new System.Windows.Forms.Label();
+            this.emailLabel = new System.Windows.Forms.Label();
+            this.purchaseHistoryLabel = new System.Windows.Forms.Label();
+            this.purchasesDisplay = new System.Windows.Forms.DataGridView();
+            this.dateRangeLabel1 = new System.Windows.Forms.Label();
+            this.dateRangeLabel2 = new System.Windows.Forms.Label();
+            this.toDateTextBox = new System.Windows.Forms.TextBox();
+            this.fromDateTextBox = new System.Windows.Forms.TextBox();
+            this.sortByDateLabel = new System.Windows.Forms.Label();
+            this.sortByTotalLabel = new System.Windows.Forms.Label();
+            this.fromPriceTextBox = new System.Windows.Forms.TextBox();
+            this.toPriceTextBox = new System.Windows.Forms.TextBox();
+            this.toPriceLabel = new System.Windows.Forms.Label();
+            this.fromPriceLabel = new System.Windows.Forms.Label();
+            this.sortPurchasesButton = new System.Windows.Forms.Button();
             this.cartTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cartItemsDisplay)).BeginInit();
             this.homeTab.SuspendLayout();
@@ -72,6 +92,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.storeProjectDataSet1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.accountTab.SuspendLayout();
+            this.purchaseTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.purchasesDisplay)).BeginInit();
             this.SuspendLayout();
             // 
             // cartTab
@@ -94,6 +116,17 @@
             this.cartTab.TabIndex = 1;
             this.cartTab.Text = "Cart";
             this.cartTab.UseVisualStyleBackColor = true;
+            // 
+            // cartTotalValueLabel
+            // 
+            this.cartTotalValueLabel.AutoSize = true;
+            this.cartTotalValueLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cartTotalValueLabel.Location = new System.Drawing.Point(636, 482);
+            this.cartTotalValueLabel.Name = "cartTotalValueLabel";
+            this.cartTotalValueLabel.Size = new System.Drawing.Size(71, 25);
+            this.cartTotalValueLabel.TabIndex = 18;
+            this.cartTotalValueLabel.Text = "$0.00";
+            this.cartTotalValueLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cartItemQtyLabel
             // 
@@ -211,7 +244,6 @@
             this.cartHeader.Size = new System.Drawing.Size(115, 46);
             this.cartHeader.TabIndex = 0;
             this.cartHeader.Text = "Cart";
-            this.cartHeader.Click += new System.EventHandler(this.cartHeader_Click);
             // 
             // homeTab
             // 
@@ -418,6 +450,7 @@
             this.tabControl1.Controls.Add(this.homeTab);
             this.tabControl1.Controls.Add(this.cartTab);
             this.tabControl1.Controls.Add(this.accountTab);
+            this.tabControl1.Controls.Add(this.purchaseTab);
             this.tabControl1.Location = new System.Drawing.Point(0, -1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -425,26 +458,18 @@
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
-            // pRODUCTTableAdapter
-            // 
-            this.pRODUCTTableAdapter.ClearBeforeFill = true;
-            // 
-            // cartTotalValueLabel
-            // 
-            this.cartTotalValueLabel.AutoSize = true;
-            this.cartTotalValueLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cartTotalValueLabel.Location = new System.Drawing.Point(636, 482);
-            this.cartTotalValueLabel.Name = "cartTotalValueLabel";
-            this.cartTotalValueLabel.Size = new System.Drawing.Size(71, 25);
-            this.cartTotalValueLabel.TabIndex = 18;
-            this.cartTotalValueLabel.Text = "$0.00";
-            this.cartTotalValueLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // accountTab
             // 
+            this.accountTab.Controls.Add(this.emailLabel);
+            this.accountTab.Controls.Add(this.addressLabel);
+            this.accountTab.Controls.Add(this.accountNameLabel);
+            this.accountTab.Controls.Add(this.amountLabel);
+            this.accountTab.Controls.Add(this.paymentTextBox);
+            this.accountTab.Controls.Add(this.makePaymentButton);
             this.accountTab.Controls.Add(this.balanceValueLabel);
             this.accountTab.Controls.Add(this.balanceLabel);
             this.accountTab.Controls.Add(this.accountTabHeaderLabel);
+            this.accountTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.accountTab.Location = new System.Drawing.Point(4, 25);
             this.accountTab.Name = "accountTab";
             this.accountTab.Padding = new System.Windows.Forms.Padding(3);
@@ -452,6 +477,68 @@
             this.accountTab.TabIndex = 2;
             this.accountTab.Text = "Account";
             this.accountTab.UseVisualStyleBackColor = true;
+            // 
+            // amountLabel
+            // 
+            this.amountLabel.AutoSize = true;
+            this.amountLabel.BackColor = System.Drawing.Color.Transparent;
+            this.amountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.amountLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.amountLabel.Location = new System.Drawing.Point(243, 463);
+            this.amountLabel.Name = "amountLabel";
+            this.amountLabel.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.amountLabel.Size = new System.Drawing.Size(172, 26);
+            this.amountLabel.TabIndex = 15;
+            this.amountLabel.Text = "Enter Amount:";
+            // 
+            // paymentTextBox
+            // 
+            this.paymentTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.paymentTextBox.Location = new System.Drawing.Point(435, 463);
+            this.paymentTextBox.Name = "paymentTextBox";
+            this.paymentTextBox.Size = new System.Drawing.Size(141, 26);
+            this.paymentTextBox.TabIndex = 13;
+            // 
+            // makePaymentButton
+            // 
+            this.makePaymentButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.makePaymentButton.CausesValidation = false;
+            this.makePaymentButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.makePaymentButton.Font = new System.Drawing.Font("Verdana", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.makePaymentButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.makePaymentButton.Location = new System.Drawing.Point(296, 527);
+            this.makePaymentButton.Name = "makePaymentButton";
+            this.makePaymentButton.Size = new System.Drawing.Size(280, 53);
+            this.makePaymentButton.TabIndex = 12;
+            this.makePaymentButton.Text = "Pay Balance";
+            this.makePaymentButton.UseVisualStyleBackColor = false;
+            this.makePaymentButton.Click += new System.EventHandler(this.makePaymentButton_Click);
+            // 
+            // balanceValueLabel
+            // 
+            this.balanceValueLabel.AutoSize = true;
+            this.balanceValueLabel.BackColor = System.Drawing.Color.Transparent;
+            this.balanceValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 19F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.balanceValueLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.balanceValueLabel.Location = new System.Drawing.Point(458, 389);
+            this.balanceValueLabel.Name = "balanceValueLabel";
+            this.balanceValueLabel.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.balanceValueLabel.Size = new System.Drawing.Size(118, 37);
+            this.balanceValueLabel.TabIndex = 3;
+            this.balanceValueLabel.Text = "$0.00";
+            // 
+            // balanceLabel
+            // 
+            this.balanceLabel.AutoSize = true;
+            this.balanceLabel.BackColor = System.Drawing.Color.Transparent;
+            this.balanceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 19F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.balanceLabel.ForeColor = System.Drawing.Color.MediumSeaGreen;
+            this.balanceLabel.Location = new System.Drawing.Point(161, 389);
+            this.balanceLabel.Name = "balanceLabel";
+            this.balanceLabel.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.balanceLabel.Size = new System.Drawing.Size(277, 37);
+            this.balanceLabel.TabIndex = 2;
+            this.balanceLabel.Text = "Current Balance:";
             // 
             // accountTabHeaderLabel
             // 
@@ -466,31 +553,223 @@
             this.accountTabHeaderLabel.TabIndex = 1;
             this.accountTabHeaderLabel.Text = "Account Home";
             // 
-            // balanceLabel
+            // pRODUCTTableAdapter
             // 
-            this.balanceLabel.AutoSize = true;
-            this.balanceLabel.BackColor = System.Drawing.Color.Transparent;
-            this.balanceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 19F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.balanceLabel.ForeColor = System.Drawing.Color.MediumSeaGreen;
-            this.balanceLabel.Location = new System.Drawing.Point(8, 124);
-            this.balanceLabel.Name = "balanceLabel";
-            this.balanceLabel.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.balanceLabel.Size = new System.Drawing.Size(287, 37);
-            this.balanceLabel.TabIndex = 2;
-            this.balanceLabel.Text = "Account Balance:";
+            this.pRODUCTTableAdapter.ClearBeforeFill = true;
             // 
-            // balanceValueLabel
+            // purchaseTab
             // 
-            this.balanceValueLabel.AutoSize = true;
-            this.balanceValueLabel.BackColor = System.Drawing.Color.Transparent;
-            this.balanceValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 19F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.balanceValueLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.balanceValueLabel.Location = new System.Drawing.Point(331, 124);
-            this.balanceValueLabel.Name = "balanceValueLabel";
-            this.balanceValueLabel.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.balanceValueLabel.Size = new System.Drawing.Size(118, 37);
-            this.balanceValueLabel.TabIndex = 3;
-            this.balanceValueLabel.Text = "$0.00";
+            this.purchaseTab.Controls.Add(this.sortPurchasesButton);
+            this.purchaseTab.Controls.Add(this.fromPriceTextBox);
+            this.purchaseTab.Controls.Add(this.toPriceTextBox);
+            this.purchaseTab.Controls.Add(this.toPriceLabel);
+            this.purchaseTab.Controls.Add(this.fromPriceLabel);
+            this.purchaseTab.Controls.Add(this.sortByTotalLabel);
+            this.purchaseTab.Controls.Add(this.sortByDateLabel);
+            this.purchaseTab.Controls.Add(this.fromDateTextBox);
+            this.purchaseTab.Controls.Add(this.toDateTextBox);
+            this.purchaseTab.Controls.Add(this.dateRangeLabel2);
+            this.purchaseTab.Controls.Add(this.dateRangeLabel1);
+            this.purchaseTab.Controls.Add(this.purchasesDisplay);
+            this.purchaseTab.Controls.Add(this.purchaseHistoryLabel);
+            this.purchaseTab.Location = new System.Drawing.Point(4, 25);
+            this.purchaseTab.Name = "purchaseTab";
+            this.purchaseTab.Padding = new System.Windows.Forms.Padding(3);
+            this.purchaseTab.Size = new System.Drawing.Size(1406, 844);
+            this.purchaseTab.TabIndex = 3;
+            this.purchaseTab.Text = "Purchase History";
+            this.purchaseTab.UseVisualStyleBackColor = true;
+            // 
+            // accountNameLabel
+            // 
+            this.accountNameLabel.AutoSize = true;
+            this.accountNameLabel.BackColor = System.Drawing.Color.Transparent;
+            this.accountNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.accountNameLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.accountNameLabel.Location = new System.Drawing.Point(44, 109);
+            this.accountNameLabel.Name = "accountNameLabel";
+            this.accountNameLabel.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.accountNameLabel.Size = new System.Drawing.Size(109, 26);
+            this.accountNameLabel.TabIndex = 16;
+            this.accountNameLabel.Text = "Name:  ";
+            // 
+            // addressLabel
+            // 
+            this.addressLabel.AutoSize = true;
+            this.addressLabel.BackColor = System.Drawing.Color.Transparent;
+            this.addressLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addressLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.addressLabel.Location = new System.Drawing.Point(44, 287);
+            this.addressLabel.Name = "addressLabel";
+            this.addressLabel.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.addressLabel.Size = new System.Drawing.Size(221, 26);
+            this.addressLabel.TabIndex = 17;
+            this.addressLabel.Text = "Shipping Address:  ";
+            // 
+            // emailLabel
+            // 
+            this.emailLabel.AutoSize = true;
+            this.emailLabel.BackColor = System.Drawing.Color.Transparent;
+            this.emailLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.emailLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.emailLabel.Location = new System.Drawing.Point(44, 198);
+            this.emailLabel.Name = "emailLabel";
+            this.emailLabel.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.emailLabel.Size = new System.Drawing.Size(106, 26);
+            this.emailLabel.TabIndex = 18;
+            this.emailLabel.Text = "Email:  ";
+            // 
+            // purchaseHistoryLabel
+            // 
+            this.purchaseHistoryLabel.AutoSize = true;
+            this.purchaseHistoryLabel.BackColor = System.Drawing.Color.Transparent;
+            this.purchaseHistoryLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.purchaseHistoryLabel.ForeColor = System.Drawing.Color.ForestGreen;
+            this.purchaseHistoryLabel.Location = new System.Drawing.Point(291, 31);
+            this.purchaseHistoryLabel.Name = "purchaseHistoryLabel";
+            this.purchaseHistoryLabel.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.purchaseHistoryLabel.Size = new System.Drawing.Size(345, 46);
+            this.purchaseHistoryLabel.TabIndex = 18;
+            this.purchaseHistoryLabel.Text = "Purchase History";
+            // 
+            // purchasesDisplay
+            // 
+            this.purchasesDisplay.AllowUserToAddRows = false;
+            this.purchasesDisplay.AllowUserToDeleteRows = false;
+            this.purchasesDisplay.AllowUserToResizeColumns = false;
+            this.purchasesDisplay.AllowUserToResizeRows = false;
+            this.purchasesDisplay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.purchasesDisplay.Location = new System.Drawing.Point(31, 174);
+            this.purchasesDisplay.Name = "purchasesDisplay";
+            this.purchasesDisplay.RowHeadersWidth = 51;
+            this.purchasesDisplay.RowTemplate.Height = 24;
+            this.purchasesDisplay.Size = new System.Drawing.Size(417, 305);
+            this.purchasesDisplay.TabIndex = 19;
+            // 
+            // dateRangeLabel1
+            // 
+            this.dateRangeLabel1.AutoSize = true;
+            this.dateRangeLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.dateRangeLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateRangeLabel1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.dateRangeLabel1.Location = new System.Drawing.Point(474, 229);
+            this.dateRangeLabel1.Name = "dateRangeLabel1";
+            this.dateRangeLabel1.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.dateRangeLabel1.Size = new System.Drawing.Size(89, 26);
+            this.dateRangeLabel1.TabIndex = 20;
+            this.dateRangeLabel1.Text = "From:";
+            // 
+            // dateRangeLabel2
+            // 
+            this.dateRangeLabel2.AutoSize = true;
+            this.dateRangeLabel2.BackColor = System.Drawing.Color.Transparent;
+            this.dateRangeLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateRangeLabel2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.dateRangeLabel2.Location = new System.Drawing.Point(721, 229);
+            this.dateRangeLabel2.Name = "dateRangeLabel2";
+            this.dateRangeLabel2.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.dateRangeLabel2.Size = new System.Drawing.Size(62, 26);
+            this.dateRangeLabel2.TabIndex = 21;
+            this.dateRangeLabel2.Text = "To:";
+            // 
+            // toDateTextBox
+            // 
+            this.toDateTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toDateTextBox.Location = new System.Drawing.Point(799, 229);
+            this.toDateTextBox.Name = "toDateTextBox";
+            this.toDateTextBox.Size = new System.Drawing.Size(113, 26);
+            this.toDateTextBox.TabIndex = 22;
+            // 
+            // fromDateTextBox
+            // 
+            this.fromDateTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fromDateTextBox.Location = new System.Drawing.Point(579, 229);
+            this.fromDateTextBox.Name = "fromDateTextBox";
+            this.fromDateTextBox.Size = new System.Drawing.Size(126, 26);
+            this.fromDateTextBox.TabIndex = 23;
+            // 
+            // sortByDateLabel
+            // 
+            this.sortByDateLabel.AutoSize = true;
+            this.sortByDateLabel.BackColor = System.Drawing.Color.Transparent;
+            this.sortByDateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sortByDateLabel.ForeColor = System.Drawing.Color.DarkSeaGreen;
+            this.sortByDateLabel.Location = new System.Drawing.Point(480, 174);
+            this.sortByDateLabel.Name = "sortByDateLabel";
+            this.sortByDateLabel.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.sortByDateLabel.Size = new System.Drawing.Size(225, 22);
+            this.sortByDateLabel.TabIndex = 24;
+            this.sortByDateLabel.Text = "Sort by date (mm/dd/yy):";
+            // 
+            // sortByTotalLabel
+            // 
+            this.sortByTotalLabel.AutoSize = true;
+            this.sortByTotalLabel.BackColor = System.Drawing.Color.Transparent;
+            this.sortByTotalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sortByTotalLabel.ForeColor = System.Drawing.Color.DarkSeaGreen;
+            this.sortByTotalLabel.Location = new System.Drawing.Point(480, 301);
+            this.sortByTotalLabel.Name = "sortByTotalLabel";
+            this.sortByTotalLabel.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.sortByTotalLabel.Size = new System.Drawing.Size(138, 22);
+            this.sortByTotalLabel.TabIndex = 25;
+            this.sortByTotalLabel.Text = "Sort by Total:";
+            // 
+            // fromPriceTextBox
+            // 
+            this.fromPriceTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fromPriceTextBox.Location = new System.Drawing.Point(579, 350);
+            this.fromPriceTextBox.Name = "fromPriceTextBox";
+            this.fromPriceTextBox.Size = new System.Drawing.Size(126, 26);
+            this.fromPriceTextBox.TabIndex = 29;
+            // 
+            // toPriceTextBox
+            // 
+            this.toPriceTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toPriceTextBox.Location = new System.Drawing.Point(804, 350);
+            this.toPriceTextBox.Name = "toPriceTextBox";
+            this.toPriceTextBox.Size = new System.Drawing.Size(113, 26);
+            this.toPriceTextBox.TabIndex = 28;
+            // 
+            // toPriceLabel
+            // 
+            this.toPriceLabel.AutoSize = true;
+            this.toPriceLabel.BackColor = System.Drawing.Color.Transparent;
+            this.toPriceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toPriceLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.toPriceLabel.Location = new System.Drawing.Point(726, 350);
+            this.toPriceLabel.Name = "toPriceLabel";
+            this.toPriceLabel.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.toPriceLabel.Size = new System.Drawing.Size(62, 26);
+            this.toPriceLabel.TabIndex = 27;
+            this.toPriceLabel.Text = "To:";
+            // 
+            // fromPriceLabel
+            // 
+            this.fromPriceLabel.AutoSize = true;
+            this.fromPriceLabel.BackColor = System.Drawing.Color.Transparent;
+            this.fromPriceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fromPriceLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.fromPriceLabel.Location = new System.Drawing.Point(474, 350);
+            this.fromPriceLabel.Name = "fromPriceLabel";
+            this.fromPriceLabel.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.fromPriceLabel.Size = new System.Drawing.Size(89, 26);
+            this.fromPriceLabel.TabIndex = 26;
+            this.fromPriceLabel.Text = "From:";
+            // 
+            // sortPurchasesButton
+            // 
+            this.sortPurchasesButton.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.sortPurchasesButton.CausesValidation = false;
+            this.sortPurchasesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.sortPurchasesButton.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sortPurchasesButton.ForeColor = System.Drawing.Color.White;
+            this.sortPurchasesButton.Location = new System.Drawing.Point(579, 426);
+            this.sortPurchasesButton.Name = "sortPurchasesButton";
+            this.sortPurchasesButton.Size = new System.Drawing.Size(236, 53);
+            this.sortPurchasesButton.TabIndex = 30;
+            this.sortPurchasesButton.Text = "Sort";
+            this.sortPurchasesButton.UseVisualStyleBackColor = false;
+            this.sortPurchasesButton.Click += new System.EventHandler(this.sortPurchasesButton_Click);
             // 
             // joeysMain
             // 
@@ -514,6 +793,9 @@
             this.tabControl1.ResumeLayout(false);
             this.accountTab.ResumeLayout(false);
             this.accountTab.PerformLayout();
+            this.purchaseTab.ResumeLayout(false);
+            this.purchaseTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.purchasesDisplay)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -554,5 +836,25 @@
         private System.Windows.Forms.Label balanceValueLabel;
         private System.Windows.Forms.Label balanceLabel;
         private System.Windows.Forms.Label accountTabHeaderLabel;
+        private System.Windows.Forms.TextBox paymentTextBox;
+        private System.Windows.Forms.Button makePaymentButton;
+        private System.Windows.Forms.Label amountLabel;
+        private System.Windows.Forms.TabPage purchaseTab;
+        private System.Windows.Forms.Label accountNameLabel;
+        private System.Windows.Forms.Label addressLabel;
+        private System.Windows.Forms.Label emailLabel;
+        private System.Windows.Forms.Label purchaseHistoryLabel;
+        private System.Windows.Forms.DataGridView purchasesDisplay;
+        private System.Windows.Forms.Label sortByDateLabel;
+        private System.Windows.Forms.TextBox fromDateTextBox;
+        private System.Windows.Forms.TextBox toDateTextBox;
+        private System.Windows.Forms.Label dateRangeLabel2;
+        private System.Windows.Forms.Label dateRangeLabel1;
+        private System.Windows.Forms.TextBox fromPriceTextBox;
+        private System.Windows.Forms.TextBox toPriceTextBox;
+        private System.Windows.Forms.Label toPriceLabel;
+        private System.Windows.Forms.Label fromPriceLabel;
+        private System.Windows.Forms.Label sortByTotalLabel;
+        private System.Windows.Forms.Button sortPurchasesButton;
     }
 }

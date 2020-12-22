@@ -12,18 +12,17 @@ namespace SalesProject
 {
     public partial class joeysMain : Form
     {
-        private string userID;
-        private Cart cart;
+        private Account account;
+        private StoreDBDataContext db = new StoreDBDataContext();
+
         private PRODUCT selectedItem;
         private int selectedCartRowIndex;
         private int quantity;
-        private StoreDBDataContext db = new StoreDBDataContext();
 
         public joeysMain(string userID)
         {
             InitializeComponent();
-            this.userID = userID;
-            cart = new Cart(userID);
+            account = new Account(userID);
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -32,6 +31,7 @@ namespace SalesProject
             itemList.Sort(itemList.Columns[1], ListSortDirection.Ascending);
             UpdateCartTabData();
             UpdateAccountTab();
+            UpdatePurchasesTab();
         }
 
         private void UpdateCartTabData()
@@ -41,7 +41,7 @@ namespace SalesProject
             dt.Columns.Add("Item", typeof(string));
             dt.Columns.Add("Quantity", typeof(int));
 
-            cart.GetCartItems().ToList().ForEach(kvp => dt.Rows.Add(new object[]
+            account.CartItems.ToList().ForEach(kvp => dt.Rows.Add(new object[]
             {
                 kvp.Key.prodID, 
                 kvp.Key.prodName, 
@@ -50,7 +50,7 @@ namespace SalesProject
 
             cartItemsDisplay.DataSource = dt;
             
-            if (cart.GetCartItems().Count > 0)
+            if (account.CartItems.Count > 0)
             {
                 checkoutButton.Visible = true;
             }
@@ -61,18 +61,33 @@ namespace SalesProject
                 cartItemQtyLabel.Text = "Quantity";
                 removeItemButton.Visible = false;
             }
-            cartTotalValueLabel.Text = string.Format("{0:C}", cart.GetCartTotal());
+            cartTotalValueLabel.Text = string.Format("{0:C}", account.CartTotal);
         }
 
         private void UpdateAccountTab()
         {
-            balanceValueLabel.Text = GetUserBalance();
+            balanceValueLabel.Text = string.Format("{0:C}", account.Balance);
+            accountNameLabel.Text = "Name:  " + account.Name;
+            emailLabel.Text = "Email:  " + account.Email;
+            addressLabel.Text = "Address:  " + account.Address;
         }
 
-        private string GetUserBalance()
+        private void UpdatePurchasesTab()
         {
-            decimal bal = db.CUSTOMERs.Single(c => c.userID == userID).balance ?? 0;
-            return string.Format("{0:C}", bal);
+            DataTable dt = new DataTable();
+
+            dt.Columns.Add("ID", typeof(int));
+            dt.Columns.Add("Date", typeof(string));
+            dt.Columns.Add("Total", typeof(string));
+
+            db.ORDERs.Where(p => p.userID == account.UserID).ToList().ForEach(p => dt.Rows.Add(new object[]
+            {
+                p.orderID,
+                string.Format("{0:MM/dd/yy}", p.date),
+                string.Format("{0:C}", p.total)
+            }));
+
+            purchasesDisplay.DataSource = dt;
         }
 
         private void searchBar_TextChanged(object sender, EventArgs e)
@@ -119,7 +134,7 @@ namespace SalesProject
         {
             if (AddIsValid())
             {
-                cart.AddToCart(selectedItem, quantity);
+                account.AddToCart(selectedItem, quantity);
                 UpdateCartTabData();
             }
         }
@@ -151,11 +166,6 @@ namespace SalesProject
             return false;
         }
 
-        private void cartHeader_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateCartTabData();
@@ -163,11 +173,12 @@ namespace SalesProject
 
         private void checkoutButton_Click(object sender, EventArgs e)
         {
-            if (cart.GetCartItems().Count != 0)
+            if (account.CartItems.Count != 0)
             {
-                if (cart.AttemptCheckout())
+                if (account.AttemptCheckout())
                 {
-                    db = new StoreDBDataContext();
+                    // refresh db
+                    db.Refresh(System.Data.Linq.RefreshMode.KeepChanges);
                 }
                 UpdateAccountTab();
                 UpdateCartTabData();
@@ -198,9 +209,26 @@ namespace SalesProject
 
             if (cartItem != null)
             {
-                cart.RemoveFromCart(cartItem);
+                account.RemoveFromCart(cartItem);
                 UpdateCartTabData();
             }
+        }
+
+        private void makePaymentButton_Click(object sender, EventArgs e)
+        {
+            decimal amount;
+            if (decimal.TryParse(paymentTextBox.Text, out amount))
+            {
+                account.PayBalance(amount);
+                paymentTextBox.Text = "";
+            }
+            UpdateAccountTab();
+            UpdateCartTabData();
+        }
+
+        private void sortPurchasesButton_Click(object sender, EventArgs e)
+        {
+            //GetSortingParams();
         }
     }
 }
